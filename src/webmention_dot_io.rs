@@ -21,6 +21,13 @@ fn convert_json_to_webmention(json : &Value) -> Webmention {
                 title : value_to_string(&json["data"]["name"]),
                 content : value_to_string(&json["data"]["content"]),
                 url : value_to_string(&json["data"]["url"]),
+                date : if &json["data"]["published"] == &Value::Null {
+                                value_to_string(&json["verified_date"])
+                        }
+                        else {
+                                value_to_string(&json["data"]["published"])
+                        },
+
                 mention_type : match value_to_string(&json["activity"]["type"]).as_str() {
                                 "mention" => WebmentionType::mention,
                                 "like" => WebmentionType::like,

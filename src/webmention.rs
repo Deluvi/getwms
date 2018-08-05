@@ -14,6 +14,7 @@ pub struct Webmention {
     pub title : String,
     pub content : String,
     pub url : String,
+    pub date : String,
     pub mention_type : WebmentionType,
 }
 
